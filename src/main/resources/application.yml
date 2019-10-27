@@ -1,0 +1,53 @@
+server:
+  port: 80
+
+spring:
+  mvc:
+    servlet:
+      load-on-startup: 1
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/flashSale?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: 1234
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters : stat
+    maxActive : 20
+    initialSize : 10
+    maxWait : 60000
+    minIdle : 100
+    timeBetweenEvictionRunsMillis : 60000
+    minEvictableIdleTimeMillis : 300000
+    validationQuery : select 'x'
+    testWhileIdle : true
+    testOnBorrow : false
+    testOnReturn : false
+    poolPreparedStatements : true
+    maxOpenPreparedStatements : 200
+
+  thymeleaf:
+    cache: false
+    enabled: true
+
+logging:
+  path: "d:/log/test2.log"
+  level:
+    com.itlike : info
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.flashsale.pojo
+  configuration:
+    map-underscore-to-camel-case : true
+    default-fetch-size: 100
+    default-statement-timeout: 3000
+redis:
+  host : 127.0.0.1
+  port : 6379
+  timeout : 300
+  #连接池最大连接数
+  poolMaxTotal : 500
+  poolMaxIdle : 500
+  poolMinIdle : 200
+  poolMaxWait : 3000
+
+

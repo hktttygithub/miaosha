@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.flashsale.mapper.OrderMapper">
+    <insert id="insert">
+        <selectKey keyColumn="id" keyProperty="id" resultType="long" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+
+        insert into order_info(
+          user_id, goods_id, goods_name, goods_count, goods_price, order_channel, status, create_date)
+          values(#{userId}, #{goodsId}, #{goodsName}, #{goodsCount}, #{goodsPrice}, #{orderChannel},#{status},
+          #{createDate} )
+    </insert>
+    <insert id="insertMiaoshaOrder">
+        insert into miaosha_order (user_id, goods_id, order_id)values(#{userId}, #{goodsId}, #{orderId})
+    </insert>
+
+    <select id="getByUserIdGoodsId" resultType="com.flashsale.pojo.MiaoshaOrder">
+        select * from miaosha_order where user_id=#{userId} and goods_id=#{goodsId} limit 1
+    </select>
+</mapper>
